@@ -5,11 +5,27 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   position: fixed;
-  padding: 0 120px;
-  background-color: 'transparent'; 
+  padding: 0 7.5rem;
+  background-color: var(--soft-black); 
+
+  box-shadow: 0 0 5px 2px var(--soft-black);
 }
 
-header button {
-  display: none;
+@media (max-width: 720px) {
+  header {
+    padding: 0 5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  header {
+    padding: 0 2rem 0 1.5rem;
+    height: 75px;
+  }
+
+  header > img {
+    width: 160px;
+  }
 }

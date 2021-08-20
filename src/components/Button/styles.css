@@ -1,0 +1,51 @@
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 8px;
+  
+  font-size: 0.94rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+button.default {
+  color: #fff;
+  background-color: var(--orange);
+}
+
+button.outlined.primary { 
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  background-color: rgba(245, 123, 29, 0.15)
+}
+
+button.secondary {
+  border: 1px solid var(--error);
+  color: var(--error);
+  background-color: rgba(229, 46, 77, 0.15)
+}
+
+button.tertiary {
+  border: 1px solid var(--gray);
+  color: #4D4D4D;
+  background-color: transparent;
+}
+
+button.icon-start img {
+  margin-right: 0.5rem;
+}
+
+button.icon-end img {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 560px) {
+  button.icon {
+    padding: 8px 10px;
+    font-size: 0.94rem;
+  }
+}

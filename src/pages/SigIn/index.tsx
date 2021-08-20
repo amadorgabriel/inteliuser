@@ -1,5 +1,7 @@
 import "../../styles/pages/sign.css";
 
+import { FlatButton } from "../../components/Button/Flat";
+
 export function SigIn() {
   return (
     <div className="container">
@@ -23,7 +25,7 @@ export function SigIn() {
             <input placeholder="Email" type="email" required />
             <input placeholder="Senha" type="password" required />
       
-            <button type="submit">Login</button>
+            <FlatButton label="Login" type="submit" />
           </form>
 
           <p>
