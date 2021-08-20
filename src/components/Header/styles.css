@@ -1,0 +1,15 @@
+header {
+  height: 90px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  padding: 0 120px;
+  background-color: 'transparent'; 
+}
+
+header button {
+  display: none;
+}
