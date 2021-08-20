@@ -4,36 +4,64 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 1080px){
-  html{
+@media (max-width: 1080px) {
+  html {
     font-size: 93.75%; /* 15px */
   }
 }
 
-@media (max-width: 720px){
-  html{
+@media (max-width: 720px) {
+  html {
     font-size: 87.5%; /* 14px */
   }
 }
 
+:root {
+  --orange: #fe7b1d;
+  --sucess: #33cc95;
+  --warning: #ffa300;
+  --error: #e52e4d;
+  --soft-black: #333333;
+  --gray: #a8a8b3;
+
+  --title: #333333;
+  --subtitle: #464646;
+}
+
+.global-wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
-  background-color: whitesmoke;
-  color: #FFF;
-  font-family: 'Raleway', sans-serif;
+  background-color: #efefef;
+  color: var(--soft-black);
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
 }
 
-body, input, button, textarea {
-  font: 400 1rem #FFF;
+body,
+input,
+button,
+textarea {
+  font: 400 1rem var(--soft-black);
 }
 
-h1 {
-  font-size: 2rem;
+h1,
+h2,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
 }
 
-h2 {
-  font-size: 1.5rem;
+a {
+  color: var(--orange);
 }
 
-h2, h3, h4, h5, h6 {
-  font-size: 1rem;
+::selection {
+  background: var(--orange);
+  color: #fff;
 }

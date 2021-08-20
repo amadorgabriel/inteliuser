@@ -1,5 +1,17 @@
+import { BrowserRouter } from "react-router-dom";
+import { Routes } from "./routes";
+
+import { Header } from "./components/Header";
+
+import "./styles/global.css";
+
 export function App() {
   return (
-    <h1>InteliUser</h1>
+    <BrowserRouter>
+      <div className="global-wrapper">
+        <Header />
+        <Routes />
+      </div>
+    </BrowserRouter>
   );
 }
