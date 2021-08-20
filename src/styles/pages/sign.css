@@ -20,7 +20,7 @@
 .background-side div {
   grid-row: 5;
   max-width: 600px;
-  margin-left: 120px;
+  margin-left: 7.2rem;
 }
 
 .background-side h1.display-title {
@@ -66,6 +66,7 @@
   font-family: "Lato", sans-serif;
   font-weight: 700;
 }
+
 .action-side > div > div p {
   font-size: 1.15rem;
   font-family: "Lato", sans-serif;
@@ -78,8 +79,8 @@
 }
 
 .action-side form > input {
-  margin-bottom: 0.75rem ;
-  
+  margin-bottom: 0.75rem;
+
   padding: 1rem;
   color: var(--subtitle);
   box-sizing: border-box;
@@ -89,37 +90,83 @@
   transition: ease 200ms;
 }
 
-.action-side form > input::placeholder{
-  color: var(--gray)
+.action-side form > input::placeholder {
+  color: var(--gray);
 }
 
 .action-side form > input:focus {
   box-shadow: 0px 0px 3px 2px var(--orange);
 }
 
-.action-side form > button {
-  padding: 12px 0;
-  margin-top: 1rem;
-  
-  color: #fff;
-  border: 0;
-  border-radius: 8px;
-  background: var(--orange);
-  transition: ease 0.2s;
-
-  font-family: "Lato", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-.action-side form > button:hover{
-  cursor: pointer;
-  filter: brightness(0.9);
-  transition: ease 0.2s;
-}
-
 .action-side div p {
   font-family: "Lato", sans-serif;
   font-size: 1rem;
+}
+
+@media (max-width: 1370px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 38vh 1fr;
+  }
+
+  .background-side {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 38vh;
+  }
+
+  .background-side div {
+    margin-bottom: -60px;
+  }
+}
+
+@media (max-width: 720px) {
+  .background-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .background-side div {
+    margin-left: 0;
+    max-width: 450px;
+  }
+
+  .background-side h1.display-title {
+    font-size: 3.5rem;
+  }
+
+  .background-side p {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    grid-template-rows: 250px 1fr;
+  }
+
+  .background-side {
+    height: 250px;
+  }
+
+  .background-side div {
+    margin-left: 0;
+    max-width: 400px;
+    padding: 1.5rem;
+  }
+
+  .background-side h1.display-title {
+    font-size: 3rem;
+  }
+
+  .background-side p {
+    font-size: 1.3rem;
+  }
+
+  .action-side {
+    align-items: start;
+    margin: 60px 2.5rem 0;
+  }
 }
