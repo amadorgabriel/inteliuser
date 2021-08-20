@@ -43,6 +43,20 @@ button.icon-end img {
   margin-left: 0.5rem;
 }
 
+button {
+  transition: ease 0.2s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+  transition: ease 0.2s;
+}
+
 @media (max-width: 560px) {
   button.icon {
     padding: 8px 10px;

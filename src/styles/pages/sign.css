@@ -60,6 +60,10 @@
   flex-direction: column;
 }
 
+.action-side form > div {
+  margin-bottom: 1rem;
+}
+
 .action-side h2 {
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
@@ -78,24 +82,8 @@
   margin: 2rem 0 3rem;
 }
 
-.action-side form > input {
-  margin-bottom: 0.75rem;
-
-  padding: 1rem;
-  color: var(--subtitle);
-  box-sizing: border-box;
-  border-radius: 8px;
-  border: 1px solid var(--gray);
-  outline: transparent;
-  transition: ease 200ms;
-}
-
-.action-side form > input::placeholder {
-  color: var(--gray);
-}
-
-.action-side form > input:focus {
-  box-shadow: 0px 0px 3px 2px var(--orange);
+.action-side form button {
+  margin-top: 0.5rem;
 }
 
 .action-side div p {

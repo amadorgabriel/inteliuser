@@ -1,8 +1,16 @@
+import { FlatButton } from "../../components/Button/Flat";
+import { Form } from "../../components/Form";
+import { Input } from "../../components/Input";
+import { useInput } from "../../hooks/useInput";
+
 import "../../styles/pages/sign.css";
 
-import { FlatButton } from "../../components/Button/Flat";
-
 export function SigIn() {
+  const email = useInput("");
+  const password = useInput("");
+
+  const handleForm = () => {};
+
   return (
     <div className="container">
       <section className="background-side">
@@ -21,12 +29,26 @@ export function SigIn() {
             <p>Entre na plataforma com suas credenciais!</p>
           </div>
 
-          <form>
-            <input placeholder="Email" type="email" required />
-            <input placeholder="Senha" type="password" required />
-      
+          <Form noValidate onSubmit={handleForm}>
+            <Input
+          
+              placeholder="Digite seu email"
+              type="email"
+              label="Email:"
+              required
+              {...email}
+            />
+            <Input
+              placeholder="Digite sua senha"
+              type="password"
+              label="Senha:"
+              minLength={3}
+              required
+              {...password}
+            />
+
             <FlatButton label="Login" type="submit" />
-          </form>
+          </Form>
 
           <p>
             Não possui cadastro? <a href="#">Crie uma conta!</a>

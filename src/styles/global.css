@@ -64,17 +64,3 @@ a {
   background: var(--orange);
   color: #fff;
 }
-
-button {
-  transition: ease 0.2s;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
-button:hover {
-  cursor: pointer;
-  filter: brightness(0.9);
-  transition: ease 0.2s;
-}
