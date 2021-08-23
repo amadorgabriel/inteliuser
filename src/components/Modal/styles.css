@@ -1,0 +1,35 @@
+.modalContainer {
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContainer:hover {
+  cursor: pointer;
+}
+
+.modalContainer.show {
+  visibility: visible;
+}
+
+.modalContainer.hide {
+  display: none;
+}
+
+.modalContent {
+  cursor: default;
+  padding: 1.5rem;
+  background-color: #fff;
+
+  width: 450px;
+
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
