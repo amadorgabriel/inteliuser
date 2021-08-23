@@ -13,7 +13,7 @@ export function Form({ children, onSubmit, ...rest }: FormProps) {
 
     if (!form.checkValidity()) {
       //Dispara warning toast message
-      alert('Preencha os campos de forma correta')
+      alert('Preencha os campos e de forma correta')
 
       event.stopPropagation();
       return;

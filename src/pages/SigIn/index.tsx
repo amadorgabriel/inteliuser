@@ -1,12 +1,13 @@
 import { FlatButton } from "../../components/Button/Flat";
 import { Form } from "../../components/Form";
-import { Input } from "../../components/Input";
+import { Input, Select } from "../../components/Input/index";
 import { useInput } from "../../hooks/useInput";
 
 import "../../styles/pages/sign.css";
 
 export function SigIn() {
   const email = useInput("");
+
   const password = useInput("");
 
   const handleForm = () => {};
@@ -31,13 +32,13 @@ export function SigIn() {
 
           <Form noValidate onSubmit={handleForm}>
             <Input
-          
               placeholder="Digite seu email"
               type="email"
               label="Email:"
               required
               {...email}
             />
+
             <Input
               placeholder="Digite sua senha"
               type="password"
@@ -49,10 +50,6 @@ export function SigIn() {
 
             <FlatButton label="Login" type="submit" />
           </Form>
-
-          <p>
-            Não possui cadastro? <a href="#">Crie uma conta!</a>
-          </p>
         </div>
       </section>
     </div>

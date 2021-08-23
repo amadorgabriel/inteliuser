@@ -18,7 +18,7 @@
 
 :root {
   --orange: #fe7b1d;
-  --sucess: #33cc95;
+  --sucess: #33CC5E;
   --warning: #ffa300;
   --error: #e52e4d;
   --soft-black: #333333;
@@ -42,6 +42,7 @@ body {
 body,
 input,
 button,
+select,
 textarea {
   font: 400 1rem var(--soft-black);
 }
