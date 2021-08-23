@@ -7,7 +7,7 @@ export function App() {
   return (
     <BrowserRouter>
       <div className="global-wrapper">
-        <Routes />
+          <Routes />
       </div>
     </BrowserRouter>
   );

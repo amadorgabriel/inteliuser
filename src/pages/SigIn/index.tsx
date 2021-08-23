@@ -1,16 +1,23 @@
+import { useRef } from "react";
 import { FlatButton } from "../../components/Button/Flat";
 import { Form } from "../../components/Form";
-import { Input, Select } from "../../components/Input/index";
+import { Input } from "../../components/Input/index";
+import { HtmlToastElement, Toast } from "../../components/Toast";
 import { useInput } from "../../hooks/useInput";
 
 import "../../styles/pages/sign.css";
 
 export function SigIn() {
   const email = useInput("");
-
   const password = useInput("");
 
-  const handleForm = () => {};
+  const toastRef = useRef<HtmlToastElement>(null);
+
+  const handleForm = () => {
+    if (toastRef.current) {
+      toastRef.current.showToast("Logado com sucesso", "sucess");
+    }
+  };
 
   return (
     <div className="container">
@@ -52,6 +59,8 @@ export function SigIn() {
           </Form>
         </div>
       </section>
+
+      <Toast ref={toastRef} />
     </div>
   );
 }

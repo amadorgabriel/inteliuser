@@ -1,10 +1,12 @@
-import { FormEvent, FormHTMLAttributes, ReactNode } from "react";
+import { FormEvent, FormHTMLAttributes, ReactNode, useRef } from "react";
+import { HtmlToastElement, Toast } from "../Toast";
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
 
 export function Form({ children, onSubmit, ...rest }: FormProps) {
+  const toastRef = useRef<HtmlToastElement>(null);
 
   function validateForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -12,8 +14,12 @@ export function Form({ children, onSubmit, ...rest }: FormProps) {
     const form = event.currentTarget;
 
     if (!form.checkValidity()) {
-      //Dispara warning toast message
-      alert('Preencha os campos e de forma correta')
+      if (toastRef.current) {
+        toastRef.current.showToast(
+          "Preencha os campos de forma correta",
+          "error"
+        );
+      }
 
       event.stopPropagation();
       return;
@@ -23,11 +29,12 @@ export function Form({ children, onSubmit, ...rest }: FormProps) {
   }
 
   return (
-    <form
-      onSubmit={validateForm}
-      {...rest}
-    >
-      {children}
-    </form>
+    <>
+      <form onSubmit={validateForm} {...rest}>
+        {children}
+      </form>
+
+      <Toast ref={toastRef} />
+    </>
   );
 }
