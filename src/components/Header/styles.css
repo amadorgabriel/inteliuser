@@ -1,31 +1,34 @@
-header {
+.headerContainer {
   height: 90px;
   width: 100%;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   position: fixed;
-  padding: 0 7.5rem;
+  padding: 0 2.5rem;
   background-color: var(--soft-black); 
 
   box-shadow: 0 0 5px 2px var(--soft-black);
 }
 
-@media (max-width: 720px) {
-  header {
-    padding: 0 5rem;
-  }
+.headerContent {
+  height: 90px;
+  width: 100%;
+  max-width: 1120px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 560px) {
-  header {
-    padding: 0 2rem 0 1.5rem;
+  .headerContainer {
     height: 75px;
   }
 
-  header > img {
+  .headerContainer > img {
     width: 160px;
   }
 }

@@ -4,11 +4,13 @@ button {
   justify-content: center;
   padding: 10px 12px;
 
-  border: none;
+  border: 0;
   border-radius: 8px;
-  
+}
+
+button p {
   font-size: 0.94rem;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 700;
 }
 
@@ -17,21 +19,43 @@ button.default {
   background-color: var(--orange);
 }
 
-button.outlined.primary { 
+button.no-background {
+  color: #fff;
+  background-color: transparent;
+}
+
+button.no-background:hover {
+  background-color: transparent;
+  border: none;
+}
+
+button.no-background.primary:hover {
+  background-color: rgba(245, 123, 29, 0.35);
+}
+
+button.no-background.secondary:hover {
+  background-color: rgba(229, 46, 77, 0.35);
+}
+
+button.no-background.tertiary:hover {
+  background-color: rgba(137, 137, 137, 0.35);
+}
+
+button.outlined.primary {
   border: 1px solid var(--orange);
   color: var(--orange);
-  background-color: rgba(245, 123, 29, 0.15)
+  background-color: rgba(245, 123, 29, 0.15);
 }
 
-button.secondary {
+button.outlined.secondary {
   border: 1px solid var(--error);
   color: var(--error);
-  background-color: rgba(229, 46, 77, 0.15)
+  background-color: rgba(229, 46, 77, 0.15);
 }
 
-button.tertiary {
+button.outlined.tertiary {
   border: 1px solid var(--gray);
-  color: #4D4D4D;
+  color: #4d4d4d;
   background-color: transparent;
 }
 
@@ -41,6 +65,10 @@ button.icon-start img {
 
 button.icon-end img {
   margin-left: 0.5rem;
+}
+
+button.icon-no-label img {
+  margin: 0;
 }
 
 button {

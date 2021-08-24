@@ -1,0 +1,101 @@
+.dashboardContainer {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+}
+
+.dashboardContent {
+  display: flex;
+  flex-direction: column;
+  margin: 90px auto 0;
+  padding: 60px 3rem 0;
+
+  width: 100%;
+  max-width: 1120px;
+  height: calc(100% - 90px);
+}
+
+.dashboardContent .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboardContent .header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.dashboardContainer table {
+  width: 100%;
+
+  justify-content: center;
+
+  border-spacing: 0 0.5rem;
+  margin-top: 40px;
+}
+
+.dashboardContainer table th {
+  color: var(--gray);
+  padding: 1rem 2rem;
+
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.25rem;
+  font-family: "Lato", sans-serif;
+}
+
+.dashboardContainer table td {
+  color: var(--soft-black);
+  font-family: "Lato", sans-serif;
+
+  border: 0;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
+.dashboardContainer table tr td,
+.dashboardContainer table tr th {
+  text-align: center;
+}
+
+.dashboardContainer table tbody td:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.no-content {
+  width: 450px;
+  border-radius: 5px;
+  background-color: #fff;
+
+  padding: 3.125rem 3.75rem;
+  font-size: 1.15rem !important;
+  font-family: "Lato", sans-serif;
+
+  margin: 5rem auto 0;
+  text-align: center;
+}
+
+.dashboardContainer #modal h2 {
+  font-size: 2rem !important;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.dashboardContainer #modal form > div {
+  margin-bottom: 1rem;
+}
+
+.dashboardContainer #modal button {
+  width: 100%;
+  margin-top: 0.65rem;
+}
+
+.dashboardContainer #modal .modal-buttons {
+  margin-top: 1.5rem;
+}

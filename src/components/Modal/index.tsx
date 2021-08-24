@@ -1,13 +1,13 @@
-import { ReactNode, useRef } from "react";
+import { HTMLProps, ReactNode, useRef } from "react";
 import { useModal } from "../../hooks/useModal";
 
 import "./styles.css";
 
-interface ModalProps {
+interface ModalProps extends HTMLProps<HTMLDivElement> {
   children: ReactNode;
 }
 
-export function Modal({ children }: ModalProps) {
+export function Modal({ children, ...rest }: ModalProps) {
   const { isActive, handleShowModal } = useModal();
 
   const contentModalRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,7 @@ export function Modal({ children }: ModalProps) {
       contentModalRef.current &&
       !contentModalRef.current.contains(contentArea)
     ) {
-      handleShowModal()
+      handleShowModal();
     }
   }
 
@@ -26,6 +26,7 @@ export function Modal({ children }: ModalProps) {
     <div
       className={`modalContainer ${isActive ? "show" : "hide"}`}
       onClick={event => handleClickOutsideModal(event)}
+      {...rest}
     >
       <div ref={contentModalRef} className="modalContent">
         {children}

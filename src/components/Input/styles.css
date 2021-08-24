@@ -19,6 +19,7 @@
   color: var(--subtitle);
   outline: transparent;
   display: inline-block;
+  font-family: "Lato", sans-serif;
 }
 
 .input-wrapper div.select option {
@@ -28,6 +29,7 @@
 
 .input-wrapper input::placeholder {
   color: var(--gray);
+  font-family: "Lato", sans-serif;
 }
 
 .input-wrapper input:focus,

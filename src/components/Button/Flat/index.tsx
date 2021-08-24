@@ -10,7 +10,7 @@ export function FlatButton({
 }: ButtonProps) {
   return (
     <button className={`${variant} ${color}`} {...rest}>
-      {label}
+      <p>{label}</p>
     </button>
   );
 }

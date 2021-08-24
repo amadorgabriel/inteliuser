@@ -5,12 +5,14 @@ import { IconButton } from "../Button";
 
 export function Header() {
   return (
-    <header>
-      <img src={logoImage} alt="logo empresa Intelitrader" />
+    <header className="headerContainer">
+      <div className="headerContent">
+        <img src={logoImage} alt="logo empresa Intelitrader" />
 
-      <IconButton label="Logout" edge="end">
-        <img src={exitIcon} alt="Icone sair" />
-      </IconButton>
+        <IconButton label="Logout" edge="end">
+          <img src={exitIcon} alt="Icone sair" />
+        </IconButton>
+      </div>
     </header>
   );
 }

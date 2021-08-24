@@ -20,7 +20,7 @@ export function SigIn() {
   };
 
   return (
-    <div className="container">
+    <div className="signInContainer">
       <section className="background-side">
         <div>
           <h1 className="display-title">

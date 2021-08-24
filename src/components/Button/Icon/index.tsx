@@ -1,17 +1,23 @@
-import '../styles.css';
+import { IconButtonProps } from "../interface";
 
-import { IconButtonProps } from '../interface';
+import "../styles.css";
 
 export function IconButton({
   label,
   edge = "start",
+  variant = "default",
+  color = "primary",
   children,
   ...rest
 }: IconButtonProps) {
   return (
-    <button className={`default icon-${edge}`} {...rest}>
+    <button
+      className={`${variant} ${color} icon-${label === undefined ? "no-label" : edge}`}
+      style={{ borderRadius: label ? '8px' : '4px' }}
+      {...rest}
+    >
       {edge === "start" && children}
-      {label}
+      {label && <p>{label}</p>}
       {edge === "end" && children}
     </button>
   );

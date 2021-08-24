@@ -1,5 +1,4 @@
 import { FocusEvent, InputHTMLAttributes, useState } from "react";
-import { useInput } from "../../../hooks/useInput";
 
 import "../styles.css";
 
@@ -8,8 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ label, ...rest }: InputProps) {
-  const value = useInput("");
-  const isRequiredField = rest.required
+  const isRequiredField = rest.required;
 
   const [isValid, setIsValid] = useState<Boolean>();
   const [validationMessage, setValidationMessage] = useState("");
@@ -28,10 +26,11 @@ export function Input({ label, ...rest }: InputProps) {
 
   return (
     <div className="input-wrapper">
-      {label && <p className={isRequiredField ? 'label required' : 'label'}>{label}</p>}
+      {label && (
+        <p className={isRequiredField ? "label required" : "label"}>{label}</p>
+      )}
       <input
         {...rest}
-        {...value}
         className={isValid === undefined ? "" : isValid ? "valid" : "invalid"}
         onBlur={event => validateInput(event)}
       />

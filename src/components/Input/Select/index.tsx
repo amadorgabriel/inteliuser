@@ -1,5 +1,4 @@
 import { FocusEvent, SelectHTMLAttributes, useState } from "react";
-import { useInput } from "../../../hooks/useInput";
 
 import "../styles.css";
 
@@ -9,7 +8,6 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export function Select({ label, children, ...rest }: SelectProps) {
-  const value = useInput("");
   const isRequiredField = rest.required;
 
   const [isValid, setIsValid] = useState<Boolean>();
@@ -42,7 +40,7 @@ export function Select({ label, children, ...rest }: SelectProps) {
             : "select invalid"
         }
       >
-        <select {...rest} {...value} onBlur={event => validateInput(event)}>
+        <select {...rest} onBlur={event => validateInput(event)}>
           {children}
         </select>
       </div>
