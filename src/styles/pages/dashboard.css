@@ -80,25 +80,33 @@
   text-align: center;
 }
 
-.dashboardContainer #modal-add h2 {
+.dashboardContainer #modal-add h2,
+.dashboardContainer #modal-edit h2 {
   font-size: 2rem;
   font-family: "Lato", sans-serif;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
 
-.dashboardContainer #modal-add form > div {
+.dashboardContainer #modal-add form > div,
+.dashboardContainer #modal-edit form > div {
   margin-bottom: 1rem;
 }
 
 .dashboardContainer #modal-add button,
+.dashboardContainer #modal-edit button,
 .dashboardContainer #modal-confirm button {
   width: 100%;
   margin-top: 0.65rem;
 }
 
 .dashboardContainer #modal-add .modal-buttons,
-.dashboardContainer #modal-confirm .modal-buttons {
+.dashboardContainer
+  #modal-edit
+  .modal-buttons
+  .dashboardContainer
+  #modal-confirm
+  .modal-buttons {
   margin-top: 1.5rem;
 }
 

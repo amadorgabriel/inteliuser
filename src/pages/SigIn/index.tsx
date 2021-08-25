@@ -41,7 +41,6 @@ export function SigIn() {
       history.replace({state: {}})
     }
 
-
   }, [history, state]);
   
   const handleLogin = () => {

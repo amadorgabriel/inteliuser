@@ -14,6 +14,7 @@ export function Modal({ children, isActive, ...rest }: ModalProps) {
   useEffect(() => {
       setIsOpen(isActive)
   }, [isActive])
+  
 
   function handleClickOutsideModal(event: React.MouseEvent<HTMLDivElement>) {
     const contentArea = event.target as HTMLDivElement;

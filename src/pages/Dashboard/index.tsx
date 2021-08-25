@@ -27,8 +27,12 @@ interface FormattedClient extends Omit<Client, "birthDate" | "sex"> {
 export function Dashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [addModalIsOpened, setAddModalIsOpened] = useState(false);
+  const [editModalIsOpened, setEditModalIsOpened] = useState(false);
   const [confirmModalIsOpened, setConfirmModalIsOpened] = useState(false);
   const [clientToBeDeleted, setClientToBeDeleted] = useState<Client>(
+    {} as Client
+  );
+  const [clientToBeUpdated, setClientToBeUpdated] = useState<Client>(
     {} as Client
   );
 
@@ -36,6 +40,11 @@ export function Dashboard() {
   const email = useInput("");
   const sex = useInput("");
   const birthDate = useInput("");
+
+  const editedName = useInput("");
+  const editedEmail = useInput("");
+  const editedSex = useInput("");
+  const editedBirthDate = useInput("");
 
   const toastRef = useRef<HtmlToastElement>(null);
 
@@ -60,9 +69,8 @@ export function Dashboard() {
   useEffect(() => {
     if (state?.message && state?.type) {
       toastRef.current!.showToast(state.message, state.type);
-      history.replace({state: {}})
+      history.replace({ state: {} });
     }
-
   }, [history, state]);
 
   function formatClients(clients: Client[]): FormattedClient[] {
@@ -112,22 +120,77 @@ export function Dashboard() {
 
     toastRef.current!.showToast("Usuário cadastrado com sucesso", "sucess");
 
-    email.setInput("");
     name.setInput("");
-    sex.setInput("");
+    email.setInput("");
     birthDate.setInput("");
+    sex.setInput("");
+  }
+
+  function handleEditClient() {
+    const clientsArr = [...clients];
+
+    const updatedClients = clientsArr.map(client => {
+      if (client.id === clientToBeUpdated.id) {
+        const newClient: Client = {
+          id: client.id,
+          name: editedName.value,
+          email: editedEmail.value,
+          birthDate: new Date(`${editedBirthDate.value} EDT`),
+          sex: editedSex.value,
+        };
+
+        return newClient;
+      }
+
+      return client;
+    });
+
+    setClients(updatedClients);
+    localStorage.setItem("@Inteliuser:clients", JSON.stringify(updatedClients));
+
+    setEditModalIsOpened(!editModalIsOpened);
+
+    toastRef.current!.showToast("Usuário atualizado com sucesso", "sucess");
+
+    editedName.setInput("");
+    editedEmail.setInput("");
+    editedBirthDate.setInput("");
+    editedSex.setInput("");
+  }
+
+  function handleSetClientEditModalData(clientId: number) {
+    const clientsArray = [...clients];
+
+    const clientFound = clientsArray.filter(
+      client => client.id === clientId
+    )[0];
+
+    const clientFoundBirthDate = new Intl.DateTimeFormat("pt-br")
+      .format(new Date(clientFound.birthDate))
+      .replace(/[/]/g, "-")
+      .split("T")[0]; //output'DD-MM-AAAA'
+
+    const formattedClientFoundBirthDate = clientFoundBirthDate
+      .split("-")
+      .reverse()
+      .join("-"); //output'AAAA-MM-DD'
+
+    editedName.setInput(clientFound.name);
+    editedEmail.setInput(clientFound.email);
+    editedBirthDate.setInput(formattedClientFoundBirthDate);
+    editedSex.setInput(clientFound.sex);
+
+    setClientToBeUpdated(clientFound);
   }
 
   function handleDeleteClient(id: number) {
     const clientsArray = [...clients];
-
     const newClients = clientsArray.filter(client => client.id !== id);
 
     setClients(newClients);
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
     toastRef.current!.showToast("Usuário deletado com sucesso", "sucess");
-
     setConfirmModalIsOpened(!confirmModalIsOpened);
   }
 
@@ -188,6 +251,10 @@ export function Dashboard() {
                       type="button"
                       variant="no-background"
                       color="tertiary"
+                      onClick={() => {
+                        handleSetClientEditModalData(client.id);
+                        setEditModalIsOpened(!editModalIsOpened);
+                      }}
                     >
                       <img src={editIcon} alt="Editar" />
                     </IconButton>
@@ -259,6 +326,61 @@ export function Dashboard() {
               variant="outlined"
               color="tertiary"
               onClick={() => setAddModalIsOpened(!addModalIsOpened)}
+            />
+          </div>
+        </Form>
+      </Modal>
+      <Modal id="modal-edit" isActive={editModalIsOpened}>
+        <h2>Editar</h2>
+
+        <Form noValidate onSubmit={() => handleEditClient()}>
+          <Input
+            placeholder="Digite aqui.."
+            label="Nome:"
+            required
+            {...editedName}
+          />
+
+          <Input
+            placeholder="Digite aqui.."
+            type="email"
+            label="Email:"
+            required
+            {...editedEmail}
+          />
+
+          <Input
+            placeholder="Digite aqui.."
+            type="date"
+            label="Data de Nascimento:"
+            required
+            {...editedBirthDate}
+          />
+
+          <Select label="Sexo" required {...editedSex}>
+            <option value="" disabled>
+              Selecione o sexo
+            </option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="Outro">Outro</option>
+            <option value="N/A">Prefiro não declarar</option>
+          </Select>
+
+          <div className="modal-buttons">
+            <FlatButton
+              label="Salvar alterações"
+              type="submit"
+              variant="outlined"
+              color="primary"
+            />
+
+            <FlatButton
+              label="Esquecer"
+              type="button"
+              variant="outlined"
+              color="tertiary"
+              onClick={() => setEditModalIsOpened(!editModalIsOpened)}
             />
           </div>
         </Form>
