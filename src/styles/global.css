@@ -28,11 +28,6 @@
   --subtitle: #464646;
 }
 
-.global-wrapper {
-  width: 100vw;
-  height: 100vh;
-}
-
 body {
   background-color: #efefef;
   color: var(--soft-black);

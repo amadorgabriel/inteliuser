@@ -4,7 +4,6 @@ import { Input, Select } from "../../components/Input";
 import { Header } from "../../components/Header";
 import { Form } from "../../components/Form";
 import { Modal } from "../../components/Modal";
-import { useModal } from "../../hooks/useModal";
 import { useInput } from "../../hooks/useInput";
 import { Client } from "../../types";
 import { getAge } from "../../utils/age";
@@ -24,15 +23,16 @@ interface FormattedClient extends Omit<Client, "birthDate" | "sex"> {
 
 export function Dashboard() {
   const [clients, setClients] = useState<Client[]>([]);
-
+  const [addModalIsOpened, setAddModalIsOpened] = useState(false);
+  const [confirmModalIsOpened, setConfirmModalIsOpened] = useState(false);
+  const [clientToBeDeleted, setClientToBeDeleted] = useState<Client>({} as Client);
+  
   const name = useInput("");
   const email = useInput("");
   const sex = useInput("");
   const birthDate = useInput("");
 
   const toastRef = useRef<HtmlToastElement>(null);
-
-  const { handleShowModal } = useModal();
 
   useEffect(() => {
     function loadUsers() {
@@ -84,7 +84,7 @@ export function Dashboard() {
       name: name.value,
       email: email.value,
       sex: sex.value,
-      birthDate: new Date(birthDate.value),
+      birthDate: new Date(`${birthDate.value} EDT`), //EDT ajusts timezone
     };
 
     const newClients = [...clients, client];
@@ -92,7 +92,7 @@ export function Dashboard() {
     setClients(newClients);
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
-    handleShowModal();
+    setAddModalIsOpened(!addModalIsOpened);
 
     if (toastRef.current) {
       toastRef.current.showToast("Usuário cadastrado com sucesso", "sucess");
@@ -112,11 +112,20 @@ export function Dashboard() {
     setClients(newClients);
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
-    //show modal 'tem certeza'
-
     if (toastRef.current) {
       toastRef.current.showToast("Usuário deletado com sucesso", "sucess");
     }
+
+    setConfirmModalIsOpened(!confirmModalIsOpened)
+  }
+
+  function handleConfirmModal(clientId: number) {
+    const clientsArr = [...clients]
+    const client = clientsArr.filter(client => client.id === clientId)[0];
+
+    setClientToBeDeleted(client)
+
+    setConfirmModalIsOpened(!confirmModalIsOpened)
   }
 
   const formattedClients = formatClients(clients);
@@ -133,7 +142,7 @@ export function Dashboard() {
             edge="start"
             label="Novo Usuario"
             type="button"
-            onClick={handleShowModal}
+            onClick={() => setAddModalIsOpened(!addModalIsOpened)}
           >
             <img src={plusIcon} alt="Adicionar" />
           </IconButton>
@@ -160,7 +169,7 @@ export function Dashboard() {
                   <td>{client.name}</td>
                   <td>{client.email}</td>
                   <td>{client.formattedBirthDate}</td>
-                  <td>{client.age}</td>
+                  <td>{client.age} Anos</td>
                   <td>{client.formattedSex}</td>
                   <td>
                     <IconButton
@@ -175,7 +184,7 @@ export function Dashboard() {
                       type="button"
                       variant="no-background"
                       color="secondary"
-                      onClick={() => handleDeleteClient(client.id)}
+                      onClick={() => handleConfirmModal(client.id)}
                     >
                       <img src={trashIcon} alt="Excluir" />
                     </IconButton>
@@ -186,13 +195,13 @@ export function Dashboard() {
           </table>
         ) : (
           <div className="no-content">
-            <p>Ainda não há nenhum usuário na base de dados</p>
+            <p>Não há nenhum usuário na base de dados</p>
           </div>
         )}
       </div>
 
       <Toast ref={toastRef} />
-      <Modal id="modal">
+      <Modal id="modal-add" isActive={addModalIsOpened}>
         <h2>Adicionar</h2>
 
         <Form noValidate onSubmit={handleAddNewClient}>
@@ -236,11 +245,35 @@ export function Dashboard() {
               label="Esquecer"
               type="button"
               variant="outlined"
-              color="secondary"
-              onClick={() => handleShowModal()}
+              color="tertiary"
+              onClick={() => setAddModalIsOpened(!addModalIsOpened)}
             />
           </div>
         </Form>
+      </Modal>
+      <Modal id="modal-confirm" isActive={confirmModalIsOpened}>
+        <div className="header">
+          <p>Você tem certeza que quer excluir o usuário com email abaixo?</p>
+          <p>{clientToBeDeleted.email}</p>
+        </div>
+
+        <div className="modal-buttons">
+          <FlatButton
+            label="Sim, exclua o usuário"
+            type="submit"
+            variant="outlined"
+            color="secondary"
+            onClick={() => handleDeleteClient(clientToBeDeleted.id)}
+          />
+
+          <FlatButton
+            label="Cancelar"
+            type="button"
+            variant="outlined"
+            color="tertiary"
+            onClick={() => setConfirmModalIsOpened(!confirmModalIsOpened)}
+          />
+        </div>
       </Modal>
     </div>
   );

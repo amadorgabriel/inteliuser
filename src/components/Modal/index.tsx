@@ -1,16 +1,19 @@
-import { HTMLProps, ReactNode, useRef } from "react";
-import { useModal } from "../../hooks/useModal";
+import { HTMLProps, ReactNode, useEffect, useRef, useState } from "react";
 
 import "./styles.css";
 
 interface ModalProps extends HTMLProps<HTMLDivElement> {
   children: ReactNode;
+  isActive: boolean;
 }
 
-export function Modal({ children, ...rest }: ModalProps) {
-  const { isActive, handleShowModal } = useModal();
-
+export function Modal({ children, isActive, ...rest }: ModalProps) {
+  const [isOpen, setIsOpen] = useState(false)
   const contentModalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+      setIsOpen(isActive)
+  }, [isActive])
 
   function handleClickOutsideModal(event: React.MouseEvent<HTMLDivElement>) {
     const contentArea = event.target as HTMLDivElement;
@@ -18,13 +21,13 @@ export function Modal({ children, ...rest }: ModalProps) {
       contentModalRef.current &&
       !contentModalRef.current.contains(contentArea)
     ) {
-      handleShowModal();
+      setIsOpen(false);
     }
   }
 
   return (
     <div
-      className={`modalContainer ${isActive ? "show" : "hide"}`}
+      className={`modalContainer ${isOpen ? "show" : "hide"}`}
       onClick={event => handleClickOutsideModal(event)}
       {...rest}
     >

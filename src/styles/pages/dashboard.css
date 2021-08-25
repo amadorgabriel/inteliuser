@@ -8,7 +8,7 @@
 .dashboardContent {
   display: flex;
   flex-direction: column;
-  margin: 90px auto 0;
+  margin: 90px auto;
   padding: 60px 3rem 0;
 
   width: 100%;
@@ -80,22 +80,37 @@
   text-align: center;
 }
 
-.dashboardContainer #modal h2 {
-  font-size: 2rem !important;
+.dashboardContainer #modal-add h2 {
+  font-size: 2rem;
   font-family: "Lato", sans-serif;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
 
-.dashboardContainer #modal form > div {
+.dashboardContainer #modal-add form > div {
   margin-bottom: 1rem;
 }
 
-.dashboardContainer #modal button {
+.dashboardContainer #modal-add button,
+.dashboardContainer #modal-confirm button {
   width: 100%;
   margin-top: 0.65rem;
 }
 
-.dashboardContainer #modal .modal-buttons {
+.dashboardContainer #modal-add .modal-buttons,
+.dashboardContainer #modal-confirm .modal-buttons {
   margin-top: 1.5rem;
+}
+
+.dashboardContainer #modal-confirm .header p:first-child {
+  font-size: 1.1rem;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.dashboardContainer #modal-confirm .header p:last-child {
+  font-size: 1.05rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
 }
