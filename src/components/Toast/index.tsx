@@ -2,7 +2,6 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import "./styles.css";
 
 type ToastVariantType = "sucess" | "error" | "warning";
-
 export interface HtmlToastElement extends HTMLDivElement {
   showToast: (message: string, type: ToastVariantType) => void;
 }

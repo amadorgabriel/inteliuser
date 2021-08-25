@@ -11,3 +11,8 @@ export interface User {
   email: string;
   password: string;
 }
+
+export type ToastMessage = {
+  message: string;
+  type: "sucess" | "error" | "warning";
+};

@@ -3,8 +3,8 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   flex: 1;
 }
 
@@ -90,6 +90,23 @@
   font-family: "Lato", sans-serif;
   font-size: 1rem;
 }
+
+
+.signInContainer #modal-confirm button {
+  width: 100%;
+  margin-top: 0.65rem;
+}
+
+.signInContainer #modal-confirm .modal-buttons {
+  margin-top: 1.5rem;
+}
+
+.signInContainer #modal-confirm  p{
+  font-size: 1.05rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+
 
 @media (max-width: 1370px) {
   .signInContainer {

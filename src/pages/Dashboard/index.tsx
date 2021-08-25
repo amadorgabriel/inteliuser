@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { FlatButton, IconButton } from "../../components/Button";
-import { Input, Select } from "../../components/Input";
+import { useHistory, useLocation } from "react-router-dom";
+
 import { Header } from "../../components/Header";
 import { Form } from "../../components/Form";
 import { Modal } from "../../components/Modal";
-import { useInput } from "../../hooks/useInput";
-import { Client } from "../../types";
+import { Input, Select } from "../../components/Input";
+import { FlatButton, IconButton } from "../../components/Button";
+import { HtmlToastElement, Toast } from "../../components/Toast";
+
 import { getAge } from "../../utils/age";
+import { Client, ToastMessage } from "../../types";
+import { useInput } from "../../hooks/useInput";
 
 import plusIcon from "../../assets/icons/plus.svg";
 import trashIcon from "../../assets/icons/trash-2.svg";
 import editIcon from "../../assets/icons/edit-2.svg";
 
 import "../../styles/pages/dashboard.css";
-import { HtmlToastElement, Toast } from "../../components/Toast";
 
 interface FormattedClient extends Omit<Client, "birthDate" | "sex"> {
   age: number;
@@ -25,14 +28,19 @@ export function Dashboard() {
   const [clients, setClients] = useState<Client[]>([]);
   const [addModalIsOpened, setAddModalIsOpened] = useState(false);
   const [confirmModalIsOpened, setConfirmModalIsOpened] = useState(false);
-  const [clientToBeDeleted, setClientToBeDeleted] = useState<Client>({} as Client);
-  
+  const [clientToBeDeleted, setClientToBeDeleted] = useState<Client>(
+    {} as Client
+  );
+
   const name = useInput("");
   const email = useInput("");
   const sex = useInput("");
   const birthDate = useInput("");
 
   const toastRef = useRef<HtmlToastElement>(null);
+
+  const { state } = useLocation<ToastMessage>();
+  const history = useHistory();
 
   useEffect(() => {
     function loadUsers() {
@@ -48,6 +56,14 @@ export function Dashboard() {
 
     loadUsers();
   }, []);
+
+  useEffect(() => {
+    if (state?.message && state?.type) {
+      toastRef.current!.showToast(state.message, state.type);
+      history.replace({state: {}})
+    }
+
+  }, [history, state]);
 
   function formatClients(clients: Client[]): FormattedClient[] {
     const formattedClients = clients.map(client => {
@@ -94,9 +110,7 @@ export function Dashboard() {
 
     setAddModalIsOpened(!addModalIsOpened);
 
-    if (toastRef.current) {
-      toastRef.current.showToast("Usuário cadastrado com sucesso", "sucess");
-    }
+    toastRef.current!.showToast("Usuário cadastrado com sucesso", "sucess");
 
     email.setInput("");
     name.setInput("");
@@ -112,20 +126,18 @@ export function Dashboard() {
     setClients(newClients);
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
-    if (toastRef.current) {
-      toastRef.current.showToast("Usuário deletado com sucesso", "sucess");
-    }
+    toastRef.current!.showToast("Usuário deletado com sucesso", "sucess");
 
-    setConfirmModalIsOpened(!confirmModalIsOpened)
+    setConfirmModalIsOpened(!confirmModalIsOpened);
   }
 
   function handleConfirmModal(clientId: number) {
-    const clientsArr = [...clients]
+    const clientsArr = [...clients];
     const client = clientsArr.filter(client => client.id === clientId)[0];
 
-    setClientToBeDeleted(client)
+    setClientToBeDeleted(client);
 
-    setConfirmModalIsOpened(!confirmModalIsOpened)
+    setConfirmModalIsOpened(!confirmModalIsOpened);
   }
 
   const formattedClients = formatClients(clients);
