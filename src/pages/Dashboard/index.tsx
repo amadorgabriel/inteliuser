@@ -99,6 +99,18 @@ export function Dashboard() {
     return formattedClients;
   }
 
+  function clearInputs() {
+    name.setInput("");
+    email.setInput("");
+    birthDate.setInput("");
+    sex.setInput("");
+
+    editedName.setInput("");
+    editedEmail.setInput("");
+    editedBirthDate.setInput("");
+    editedSex.setInput("");
+  }
+
   function handleAddNewClient() {
     const incrementalId =
       clients.length === 0 ? 0 : clients[clients.length - 1].id + 1;
@@ -119,11 +131,6 @@ export function Dashboard() {
     setAddModalIsOpened(!addModalIsOpened);
 
     toastRef.current!.showToast("Usuário cadastrado com sucesso", "sucess");
-
-    name.setInput("");
-    email.setInput("");
-    birthDate.setInput("");
-    sex.setInput("");
   }
 
   function handleEditClient() {
@@ -151,11 +158,6 @@ export function Dashboard() {
     setEditModalIsOpened(!editModalIsOpened);
 
     toastRef.current!.showToast("Usuário atualizado com sucesso", "sucess");
-
-    editedName.setInput("");
-    editedEmail.setInput("");
-    editedBirthDate.setInput("");
-    editedSex.setInput("");
   }
 
   function handleSetClientEditModalData(clientId: number) {
@@ -280,7 +282,12 @@ export function Dashboard() {
       </div>
 
       <Toast ref={toastRef} />
-      <Modal id="modal-add" isActive={addModalIsOpened}>
+      <Modal
+        id="modal-add"
+        isActive={addModalIsOpened}
+        onClose={clearInputs}
+        onCloseClickOutside={() => setAddModalIsOpened(!addModalIsOpened)}
+      >
         <h2>Adicionar</h2>
 
         <Form noValidate onSubmit={handleAddNewClient}>
@@ -330,7 +337,12 @@ export function Dashboard() {
           </div>
         </Form>
       </Modal>
-      <Modal id="modal-edit" isActive={editModalIsOpened}>
+      <Modal
+        id="modal-edit"
+        isActive={editModalIsOpened}
+        onClose={clearInputs}
+        onCloseClickOutside={() => setEditModalIsOpened(!editModalIsOpened)}
+      >
         <h2>Editar</h2>
 
         <Form noValidate onSubmit={() => handleEditClient()}>
@@ -385,7 +397,13 @@ export function Dashboard() {
           </div>
         </Form>
       </Modal>
-      <Modal id="modal-confirm" isActive={confirmModalIsOpened}>
+      <Modal
+        id="modal-confirm"
+        isActive={confirmModalIsOpened}
+        onCloseClickOutside={() =>
+          setConfirmModalIsOpened(!confirmModalIsOpened)
+        }
+      >
         <div className="header">
           <p>Você tem certeza que quer excluir o usuário com email abaixo?</p>
           <p>{clientToBeDeleted.email}</p>

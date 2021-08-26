@@ -5,24 +5,38 @@ import "./styles.css";
 interface ModalProps extends HTMLProps<HTMLDivElement> {
   children: ReactNode;
   isActive: boolean;
+  onClose?: () => void;
+  onCloseClickOutside?: (isActive: boolean) => void;
 }
 
-export function Modal({ children, isActive, ...rest }: ModalProps) {
-  const [isOpen, setIsOpen] = useState(false)
+export function Modal({
+  children,
+  isActive,
+  onClose,
+  onCloseClickOutside,
+  ...rest
+}: ModalProps): JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
   const contentModalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-      setIsOpen(isActive)
-  }, [isActive])
-  
+    setIsOpen(isActive);
+  }, [isActive]);
+
+  useEffect(() => {
+    if (!isOpen && onClose) {
+      onClose();
+    }
+  }, [isOpen, onClose]);
 
   function handleClickOutsideModal(event: React.MouseEvent<HTMLDivElement>) {
     const contentArea = event.target as HTMLDivElement;
     if (
       contentModalRef.current &&
-      !contentModalRef.current.contains(contentArea)
+      !contentModalRef.current.contains(contentArea) &&
+      onCloseClickOutside
     ) {
-      setIsOpen(false);
+      onCloseClickOutside(isActive);
     }
   }
 
