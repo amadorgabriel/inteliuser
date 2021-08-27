@@ -129,6 +129,7 @@ export function Dashboard() {
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
     setAddModalIsOpened(!addModalIsOpened);
+    clearInputs()
 
     toastRef.current!.showToast("Usuário cadastrado com sucesso", "sucess");
   }
@@ -156,6 +157,7 @@ export function Dashboard() {
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(updatedClients));
 
     setEditModalIsOpened(!editModalIsOpened);
+    clearInputs()
 
     toastRef.current!.showToast("Usuário atualizado com sucesso", "sucess");
   }

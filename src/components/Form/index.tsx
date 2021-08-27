@@ -2,7 +2,6 @@ import {
   FormEvent,
   FormHTMLAttributes,
   ReactNode,
-  useEffect,
   useRef,
 } from "react";
 import { HtmlToastElement, Toast } from "../Toast";
@@ -20,14 +19,6 @@ export function Form({
 }: FormProps) {
   const toastRef = useRef<HtmlToastElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-
-  // useEffect(() => {
-  //   if(formRef.current && resetFormFields){
-  //     formRef.current.reset()
-
-  //     alert('resetado')
-  //   }
-  // }, [resetFormFields])
 
   function validateForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
