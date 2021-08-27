@@ -12,7 +12,7 @@ import { getAge } from "../../utils/age";
 import { Client, ToastMessage } from "../../types";
 import { useInput } from "../../hooks/useInput";
 
-import plusIcon from "../../assets/icons/plus.svg";
+import plusIcon from "../../assets/icons/plus-2.svg";
 import trashIcon from "../../assets/icons/trash-2.svg";
 import editIcon from "../../assets/icons/edit-2.svg";
 
@@ -129,7 +129,7 @@ export function Dashboard() {
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(newClients));
 
     setAddModalIsOpened(!addModalIsOpened);
-    clearInputs()
+    clearInputs();
 
     toastRef.current!.showToast("Usuário cadastrado com sucesso", "sucess");
   }
@@ -157,7 +157,7 @@ export function Dashboard() {
     localStorage.setItem("@Inteliuser:clients", JSON.stringify(updatedClients));
 
     setEditModalIsOpened(!editModalIsOpened);
-    clearInputs()
+    clearInputs();
 
     toastRef.current!.showToast("Usuário atualizado com sucesso", "sucess");
   }
@@ -281,6 +281,15 @@ export function Dashboard() {
             <p>Não há nenhum usuário na base de dados</p>
           </div>
         )}
+
+        <IconButton
+          className="addButton"
+          type="button"
+          hasShadow
+          onClick={() => setAddModalIsOpened(!addModalIsOpened)}
+        >
+          <img src={plusIcon} alt="Adicionar" />
+        </IconButton>
       </div>
 
       <Toast ref={toastRef} />

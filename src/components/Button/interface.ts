@@ -10,6 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: ButtonColorType;
   variant?: ButtonVariantType;
   children?: React.ReactNode;
+  hasShadow?: boolean;
 }
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
@@ -17,5 +18,6 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   variant?: IconButtonVariantType;
   children: React.ReactNode;
   color?: ButtonColorType;
+  hasShadow?: boolean;
 }
   

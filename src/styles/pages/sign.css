@@ -91,7 +91,6 @@
   font-size: 1rem;
 }
 
-
 .signInContainer #modal-confirm button {
   width: 100%;
   margin-top: 0.65rem;
@@ -108,7 +107,7 @@
 }
 
 
-@media (max-width: 1370px) {
+@media (max-width: 1280px) {
   .signInContainer {
     grid-template-columns: 1fr;
     grid-template-rows: 38vh 1fr;
@@ -123,6 +122,11 @@
 
   .background-side div {
     margin-bottom: -60px;
+  }
+
+  .action-side {
+    align-items: start;
+    margin: 60px 2.5rem 0;
   }
 }
 
@@ -170,8 +174,5 @@
     font-size: 1.3rem;
   }
 
-  .action-side {
-    align-items: start;
-    margin: 60px 2.5rem 0;
-  }
+  
 }
