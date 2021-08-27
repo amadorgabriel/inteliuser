@@ -1,12 +1,33 @@
-import { FormEvent, FormHTMLAttributes, ReactNode, useRef } from "react";
+import {
+  FormEvent,
+  FormHTMLAttributes,
+  ReactNode,
+  useEffect,
+  useRef,
+} from "react";
 import { HtmlToastElement, Toast } from "../Toast";
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
+  resetFormFields?: boolean;
 }
 
-export function Form({ children, onSubmit, ...rest }: FormProps) {
+export function Form({
+  children,
+  onSubmit,
+  resetFormFields,
+  ...rest
+}: FormProps) {
   const toastRef = useRef<HtmlToastElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // useEffect(() => {
+  //   if(formRef.current && resetFormFields){
+  //     formRef.current.reset()
+
+  //     alert('resetado')
+  //   }
+  // }, [resetFormFields])
 
   function validateForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,7 +51,7 @@ export function Form({ children, onSubmit, ...rest }: FormProps) {
 
   return (
     <>
-      <form onSubmit={validateForm} {...rest}>
+      <form ref={formRef} onSubmit={validateForm} {...rest}>
         {children}
       </form>
 

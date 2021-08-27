@@ -1,17 +1,25 @@
-import { FocusEvent, SelectHTMLAttributes, useState } from "react";
+import { FocusEvent, SelectHTMLAttributes, useEffect, useState } from "react";
 
 import "../styles.css";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
+  resetField?: boolean;
   children: React.ReactNode;
 }
 
-export function Select({ label, children, ...rest }: SelectProps) {
+export function Select({ label, children, resetField, ...rest }: SelectProps) {
   const isRequiredField = rest.required;
-
   const [isValid, setIsValid] = useState<Boolean>();
   const [validationMessage, setValidationMessage] = useState("");
+
+  //Limpa validação do input
+  useEffect(() => {
+    if (resetField) {
+      setIsValid(undefined);
+      setValidationMessage("");
+    }
+  }, [resetField]);
 
   function validateInput(event: FocusEvent<HTMLSelectElement>) {
     const input = event.target;

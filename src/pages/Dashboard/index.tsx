@@ -100,15 +100,15 @@ export function Dashboard() {
   }
 
   function clearInputs() {
-    name.setInput("");
-    email.setInput("");
-    birthDate.setInput("");
-    sex.setInput("");
+    name.resetInput();
+    email.resetInput();
+    birthDate.resetInput();
+    sex.resetInput();
 
-    editedName.setInput("");
-    editedEmail.setInput("");
-    editedBirthDate.setInput("");
-    editedSex.setInput("");
+    editedName.resetInput();
+    editedEmail.resetInput();
+    editedBirthDate.resetInput();
+    editedSex.resetInput();
   }
 
   function handleAddNewClient() {
@@ -285,12 +285,14 @@ export function Dashboard() {
       <Modal
         id="modal-add"
         isActive={addModalIsOpened}
-        onClose={clearInputs}
-        onCloseClickOutside={() => setAddModalIsOpened(!addModalIsOpened)}
+        onCloseClickOutside={() => {
+          setAddModalIsOpened(!addModalIsOpened);
+          clearInputs();
+        }}
       >
         <h2>Adicionar</h2>
 
-        <Form noValidate onSubmit={handleAddNewClient}>
+        <Form noValidate onSubmit={handleAddNewClient} onReset={clearInputs}>
           <Input placeholder="Digite aqui.." label="Nome:" required {...name} />
 
           <Input
@@ -329,7 +331,7 @@ export function Dashboard() {
 
             <FlatButton
               label="Esquecer"
-              type="button"
+              type="reset"
               variant="outlined"
               color="tertiary"
               onClick={() => setAddModalIsOpened(!addModalIsOpened)}
@@ -340,12 +342,18 @@ export function Dashboard() {
       <Modal
         id="modal-edit"
         isActive={editModalIsOpened}
-        onClose={clearInputs}
-        onCloseClickOutside={() => setEditModalIsOpened(!editModalIsOpened)}
+        onCloseClickOutside={() => {
+          setEditModalIsOpened(!editModalIsOpened);
+          clearInputs();
+        }}
       >
         <h2>Editar</h2>
 
-        <Form noValidate onSubmit={() => handleEditClient()}>
+        <Form
+          noValidate
+          onSubmit={() => handleEditClient()}
+          onReset={clearInputs}
+        >
           <Input
             placeholder="Digite aqui.."
             label="Nome:"
@@ -389,7 +397,7 @@ export function Dashboard() {
 
             <FlatButton
               label="Esquecer"
-              type="button"
+              type="reset"
               variant="outlined"
               color="tertiary"
               onClick={() => setEditModalIsOpened(!editModalIsOpened)}

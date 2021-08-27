@@ -1,16 +1,24 @@
-import { FocusEvent, InputHTMLAttributes, useState } from "react";
+import { FocusEvent, InputHTMLAttributes, useEffect, useState } from "react";
 
 import "../styles.css";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  resetField?: boolean
 }
 
-export function Input({ label, ...rest }: InputProps) {
+export function Input({ label, resetField, ...rest }: InputProps) {
   const isRequiredField = rest.required;
-
   const [isValid, setIsValid] = useState<Boolean>();
   const [validationMessage, setValidationMessage] = useState("");
+
+  //Limpa validação do input
+  useEffect(() => {
+    if(resetField) {
+      setIsValid(undefined)
+      setValidationMessage('')
+    }
+  }, [resetField])
 
   function validateInput(event: FocusEvent<HTMLInputElement>) {
     const input = event.target;
