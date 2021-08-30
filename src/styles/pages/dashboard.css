@@ -1,7 +1,5 @@
 .dashboardContainer {
   width: 100%;
-  height: 100vh;
-  
   display: flex;
 }
 
@@ -27,16 +25,43 @@
   font-weight: 700;
 }
 
-.dashboardContainer table {
-  width: 100%;
-
+.dashboardContent .counter {
+  display: flex;
   justify-content: center;
+  align-items: flex-end;
 
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.dashboardContent .counter span {
+  font-weight: 900;
+  font-size: 3.125rem;
+  line-height: 3.125rem;
+  margin-right: 0.5rem;
+  color: var(--soft-black);
+}
+
+.dashboardContent .counter div p {
+  color: #7c7c7c;
+}
+
+.dashboardContent .counter div p:last-child {
+  color: var(--soft-black);
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+.dashboardContainer div table {
+  width: 100%;
+  justify-content: center;
   border-spacing: 0 0.5rem;
   margin-top: 40px;
 }
 
-.dashboardContainer table th {
+.dashboardContainer div table th {
   color: var(--gray);
   padding: 1rem 2rem;
 
@@ -46,7 +71,7 @@
   font-family: "Lato", sans-serif;
 }
 
-.dashboardContainer table td {
+.dashboardContainer div table td {
   color: var(--soft-black);
   font-family: "Lato", sans-serif;
 
@@ -56,12 +81,12 @@
   background: #fff;
 }
 
-.dashboardContainer table tr td,
-.dashboardContainer table tr th {
+.dashboardContainer div table tr td,
+.dashboardContainer div table tr th {
   text-align: center;
 }
 
-.dashboardContainer table tbody td:last-child {
+.dashboardContainer div table tbody td:last-child {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -121,4 +146,39 @@
   font-family: "Lato", sans-serif;
   font-weight: 700;
   padding-bottom: 0.5rem;
+}
+
+.addButton {
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 50% !important;
+
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.addButton:hover img {
+  animation: spin 1s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+
+@media (max-width: 560px) {
+
+  .dashboardContent .header {
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+  }
 }

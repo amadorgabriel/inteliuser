@@ -7,6 +7,7 @@ import { Modal } from "../../components/Modal";
 import { Input, Select } from "../../components/Input";
 import { FlatButton, IconButton } from "../../components/Button";
 import { HtmlToastElement, Toast } from "../../components/Toast";
+import { haveRepeatebleField } from "../../utils/checkEmail";
 
 import { getAge } from "../../utils/age";
 import { Client, ToastMessage } from "../../types";
@@ -123,6 +124,13 @@ export function Dashboard() {
       birthDate: new Date(`${birthDate.value} EDT`), //EDT ajusts timezone
     };
 
+    const emailAlreadyExists = haveRepeatebleField(clients, 'email', client.email)
+
+    if(emailAlreadyExists){
+      toastRef.current!.showToast("O email já existe em nossa plataforma", "error");
+      return
+    }
+
     const newClients = [...clients, client];
 
     setClients(newClients);
@@ -136,6 +144,13 @@ export function Dashboard() {
 
   function handleEditClient() {
     const clientsArr = [...clients];
+
+    const emailAlreadyExists = haveRepeatebleField(clients, 'email',  editedEmail.value)
+
+    if(emailAlreadyExists){
+      toastRef.current!.showToast("O email já existe em nossa plataforma", "error");
+      return
+    }
 
     const updatedClients = clientsArr.map(client => {
       if (client.id === clientToBeUpdated.id) {
@@ -209,6 +224,8 @@ export function Dashboard() {
 
   const formattedClients = formatClients(clients);
 
+  const totalClients = String(clients.length).padStart(2, '0')
+
   return (
     <div className="dashboardContainer">
       <Header />
@@ -217,65 +234,67 @@ export function Dashboard() {
         <div className="header">
           <h1>Dashboard</h1>
 
-          <IconButton
-            edge="start"
-            label="Novo Usuario"
-            type="button"
-            onClick={() => setAddModalIsOpened(!addModalIsOpened)}
-          >
-            <img src={plusIcon} alt="Adicionar" />
-          </IconButton>
+
+          <div className="counter">
+            <span>{totalClients}</span>
+            <div>
+              <p>Total de</p>
+              <p>Clientes</p>
+            </div>
+          </div>
         </div>
 
         {clients.length !== 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Nascimento</th>
-                <th>Idade</th>
-                <th>Sexo</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {formattedClients.map(client => (
-                <tr key={client.id}>
-                  <td>{client.id}</td>
-                  <td>{client.name}</td>
-                  <td>{client.email}</td>
-                  <td>{client.formattedBirthDate}</td>
-                  <td>{client.age} Anos</td>
-                  <td>{client.formattedSex}</td>
-                  <td>
-                    <IconButton
-                      type="button"
-                      variant="no-background"
-                      color="tertiary"
-                      onClick={() => {
-                        handleSetClientEditModalData(client.id);
-                        setEditModalIsOpened(!editModalIsOpened);
-                      }}
-                    >
-                      <img src={editIcon} alt="Editar" />
-                    </IconButton>
-
-                    <IconButton
-                      type="button"
-                      variant="no-background"
-                      color="secondary"
-                      onClick={() => handleConfirmModal(client.id)}
-                    >
-                      <img src={trashIcon} alt="Excluir" />
-                    </IconButton>
-                  </td>
+          <div style={{overflowX: 'auto'}} >
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Nascimento</th>
+                  <th>Idade</th>
+                  <th>Sexo</th>
+                  <th>Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {formattedClients.map(client => (
+                  <tr key={client.id}>
+                    <td>{client.id}</td>
+                    <td>{client.name}</td>
+                    <td>{client.email}</td>
+                    <td>{client.formattedBirthDate}</td>
+                    <td>{client.age} Anos</td>
+                    <td>{client.formattedSex}</td>
+                    <td>
+                      <IconButton
+                        type="button"
+                        variant="no-background"
+                        color="tertiary"
+                        onClick={() => {
+                          handleSetClientEditModalData(client.id);
+                          setEditModalIsOpened(!editModalIsOpened);
+                        }}
+                      >
+                        <img src={editIcon} alt="Editar" />
+                      </IconButton>
+
+                      <IconButton
+                        type="button"
+                        variant="no-background"
+                        color="secondary"
+                        onClick={() => handleConfirmModal(client.id)}
+                      >
+                        <img src={trashIcon} alt="Excluir" />
+                      </IconButton>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <div className="no-content">
             <p>Não há nenhum usuário na base de dados</p>

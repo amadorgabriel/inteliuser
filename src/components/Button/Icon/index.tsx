@@ -8,27 +8,23 @@ export function IconButton({
   variant = "default",
   color = "primary",
   children,
-  hasShadow = false,
   className,
+  hasShadow = false,
   ...rest
 }: IconButtonProps) {
-
   const buttonStyles = `
     ${variant} 
     ${color} 
     icon-${label === undefined ? "no-label" : edge} 
-    ${hasShadow ? "has-shadow" : "not-shadow"}
-    ${className}
-  `
+    ${hasShadow ? "has-shadow" : ""}
+    ${className ? className : ""}
+  `;
 
   return (
-    <button
-      className={buttonStyles}
-      style={{ borderRadius: label ? '8px' : '4px' }}
-      {...rest}
-    >
+    <button className={buttonStyles} {...rest}>
       {edge === "start" && children}
       {label && <p>{label}</p>}
+      {edge === "end" && children}
     </button>
   );
 }

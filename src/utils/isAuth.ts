@@ -1,5 +1,5 @@
 /**
- * Esta é uma função de exemplo da getAge
+ * Esta é uma função de exemplo
  *
  * @example
  *   const isAuthenticated = isAuth()

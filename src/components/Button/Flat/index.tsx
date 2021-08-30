@@ -1,16 +1,24 @@
-import '../styles.css';
+import "../styles.css";
 
-import { ButtonProps } from '../interface';
+import { ButtonProps } from "../interface";
 
 export function FlatButton({
   label,
   variant = "default",
   color = "primary",
   hasShadow = false,
+  className,
   ...rest
 }: ButtonProps) {
+  const buttonStyles = `
+    ${variant} 
+    ${color} 
+    ${hasShadow ? "has-shadow" : ""}
+    ${className ? className : ""}
+  `;
+
   return (
-    <button className={`${variant} ${color} ${hasShadow ? "has-shadow" : "not-shadow"}`} {...rest}>
+    <button className={buttonStyles} {...rest}>
       <p>{label}</p>
     </button>
   );

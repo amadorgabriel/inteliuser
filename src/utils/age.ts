@@ -1,5 +1,5 @@
 /**
- * Esta é uma função de exemplo da getAge
+ * Esta é uma função de exemplo
  * 
  * @example 
  *   exemplo(new Date('2003-09-25'));  // if today is 03/08/2020 '
