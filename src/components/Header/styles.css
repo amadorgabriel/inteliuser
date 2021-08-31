@@ -24,8 +24,12 @@
 }
 
 @media (max-width: 560px) {
-  .headerContainer {
+  .headerContainer, .headerContent {
     height: 75px;
+  }
+
+  .headerContent {
+    max-width: 560px;
   }
 
   .headerContent > img {

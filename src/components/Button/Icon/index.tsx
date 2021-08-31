@@ -1,6 +1,19 @@
-import { IconButtonProps } from "../interface";
+import { ButtonHTMLAttributes } from "react";
 
 import "../styles.css";
+
+type ButtonColorType = "primary" | "secondary" | "tertiary";
+type IconButtonVariantType = "no-background" | "default";
+type IconButtonEdgeType = "start" | "end";
+
+interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label?: string;
+  edge?: IconButtonEdgeType;
+  variant?: IconButtonVariantType;
+  children: React.ReactNode;
+  color?: ButtonColorType;
+  hasShadow?: boolean;
+}
 
 export function IconButton({
   label,

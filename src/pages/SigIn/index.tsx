@@ -12,13 +12,14 @@ import { isAuth } from "../../utils/isAuth";
 import { useInput } from "../../hooks/useInput";
 
 import "../../styles/pages/sign.css";
+import { GoogleLoginButton } from "../../components/Button";
 
 export function SigIn() {
   const email = useInput("");
   const password = useInput("");
+  const toastRef = useRef<HtmlToastElement>(null);
 
   const [confirmModalIsOpened, setConfirmModalIsOpened] = useState(false);
-  const toastRef = useRef<HtmlToastElement>(null);
 
   const { state } = useLocation<ToastMessage>();
   const history = useHistory();
@@ -34,25 +35,37 @@ export function SigIn() {
     }
   }, [setConfirmModalIsOpened]);
 
-  
   useEffect(() => {
     if (state?.message && state?.type) {
       toastRef.current!.showToast(state.message, state.type);
-      history.replace({state: {}})
+      history.replace({ state: {} });
     }
-
   }, [history, state]);
-  
-  const handleLogin = () => {
+
+  const handleManualLogin = () => {
     const user = {
       email: email.value,
       password: password.value,
     };
 
+    const userIsAlreadyLoggedIn = isAuth();
+
+    if (userIsAlreadyLoggedIn) {
+      history.push("/dashboard", {
+        message: "Você já está logado!",
+        type: "sucess",
+      });
+
+      return;
+    }
+
     if (email.value === "admin@gmail.com" && password.value === "123456") {
       localStorage.setItem("@Inteliuser:user-logged", JSON.stringify(user));
 
-      history.push("/dashboard", {message: "Logado com sucesso", type: "sucess" });
+      history.push("/dashboard", {
+        message: "Logado com sucesso",
+        type: "sucess",
+      });
       return;
     }
 
@@ -80,7 +93,7 @@ export function SigIn() {
             <p>Entre na plataforma com suas credenciais!</p>
           </div>
 
-          <Form noValidate onSubmit={handleLogin}>
+          <Form noValidate onSubmit={handleManualLogin}>
             <Input
               placeholder="Digite seu email"
               type="email"
@@ -100,6 +113,17 @@ export function SigIn() {
 
             <FlatButton label="Login" type="submit" />
           </Form>
+
+          <div className="google-sign-in">
+            <p>Ou</p>
+
+            <GoogleLoginButton
+              clientId={`${process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}`}
+              buttonText="Faça login com Google"
+              cookiePolicy={"single_host_origin"}
+              isSignedIn={true}
+            />
+          </div>
         </div>
       </section>
 

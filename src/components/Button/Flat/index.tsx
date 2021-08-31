@@ -1,6 +1,17 @@
+import { ButtonHTMLAttributes } from "react";
+
 import "../styles.css";
 
-import { ButtonProps } from "../interface";
+type ButtonColorType = "primary" | "secondary" | "tertiary";
+type ButtonVariantType = "outlined" | "default";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  color?: ButtonColorType;
+  variant?: ButtonVariantType;
+  children?: React.ReactNode;
+  hasShadow?: boolean;
+}
 
 export function FlatButton({
   label,

@@ -71,7 +71,7 @@
   font-weight: 700;
 }
 
-.action-side > div > div p {
+.action-side > div > div:first-child p {
   font-size: 1.15rem;
   font-family: "Lato", sans-serif;
   font-weight: 400;
@@ -79,7 +79,7 @@
 
 .action-side form {
   font-family: "Lato", sans-serif;
-  margin: 2rem 0 3rem;
+  margin: 2rem 0 1.5rem;
 }
 
 .action-side form button {
@@ -91,6 +91,26 @@
   font-size: 1rem;
 }
 
+.action-side div .google-sign-in {
+  width: 100%;
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.action-side div .google-sign-in p:first-child {
+  padding-bottom: 1.5rem;
+  font-family: Lato;
+  font-weight: 500;
+  font-size: 1rem;
+
+  color: #737380;
+}
+
+.action-side div .google-sign-in button {
+  width: 100%;
+}
+
 .signInContainer #modal-confirm button {
   width: 100%;
   margin-top: 0.65rem;
@@ -100,17 +120,17 @@
   margin-top: 1.5rem;
 }
 
-.signInContainer #modal-confirm  p{
+.signInContainer #modal-confirm p {
   font-size: 1.05rem;
   font-family: "Lato", sans-serif;
   font-weight: 400;
 }
 
-
 @media (max-width: 1280px) {
   .signInContainer {
     grid-template-columns: 1fr;
     grid-template-rows: 38vh 1fr;
+    height: unset;
   }
 
   .background-side {
@@ -126,7 +146,7 @@
 
   .action-side {
     align-items: start;
-    margin: 60px 2.5rem 0;
+    margin: 60px 2.5rem;
   }
 }
 

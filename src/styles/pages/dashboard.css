@@ -175,10 +175,51 @@
 }
 
 @media (max-width: 560px) {
-
   .dashboardContent .header {
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
+  }
+
+  .dashboardContent {
+    margin: 90px auto;
+    padding: 30px 2rem 0;
+  }
+
+  .dashboardContent .counter {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .dashboardContent .counter span {
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    margin-left: 4px;
+  }
+
+  .dashboardContent .counter div p {
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+  }
+
+  .dashboardContent .counter div p:first-child::after {
+    content: " clientes:";
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+  }
+
+  .dashboardContent .counter div p:last-child {
+    display: none;
+  }
+
+  .dashboardContainer div table {
+    margin-top: 20px;
+  }
+
+  .addButton {
+    bottom: 30px;
+    right: 30px;
   }
 }
