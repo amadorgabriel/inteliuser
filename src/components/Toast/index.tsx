@@ -7,18 +7,18 @@ export interface HtmlToastElement extends HTMLDivElement {
 }
 
 export const Toast = forwardRef((props, ref) => {
-  const [a, setShowToast] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("");
 
   useImperativeHandle(ref, () => ({
     showToast(message: string, type: ToastVariantType) {
-      setShowToast(true);
+      setIsVisible(true);
       setToastMessage(message);
       setToastType(type);
 
       setTimeout(() => {
-        setShowToast(false);
+        setIsVisible(false);
       }, 3000);
     },
   }));
@@ -26,7 +26,7 @@ export const Toast = forwardRef((props, ref) => {
   return (
     <div
       className={`toastContainer ${toastType}`}
-      id={a ? "show" : "hide"}
+      id={isVisible ? "show" : "hide"}
     >
       <p>{toastMessage}</p>
     </div>

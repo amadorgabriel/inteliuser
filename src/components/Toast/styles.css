@@ -29,6 +29,7 @@
 
 .toastContainer.error {
   background-color: var(--error);
+  color: var(--white)
 }
 
 .toastContainer#show {

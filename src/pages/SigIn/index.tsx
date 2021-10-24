@@ -93,7 +93,7 @@ export function SigIn() {
             <p>Entre na plataforma com suas credenciais!</p>
           </div>
 
-          <Form noValidate onSubmit={handleManualLogin}>
+          <Form noValidate onSubmit={() => handleManualLogin()}>
             <Input
               placeholder="Digite seu email"
               type="email"
@@ -121,7 +121,7 @@ export function SigIn() {
               clientId={`${process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}`}
               buttonText="Faça login com Google"
               cookiePolicy={"single_host_origin"}
-              isSignedIn={true}
+              isSignedIn
             />
           </div>
         </div>

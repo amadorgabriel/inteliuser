@@ -23,6 +23,7 @@
   --error: #e52e4d;
   --soft-black: #333333;
   --gray: #a8a8b3;
+  --white: #ffffff;
 
   --title: #333333;
   --subtitle: #464646;
@@ -40,6 +41,7 @@ button,
 select,
 textarea {
   font: 400 1rem var(--soft-black);
+  font-family: "Lato", sans-serif;
 }
 
 h1,
